@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from typing import Dict, Any
 from sklearn.metrics import (
-    accuracy_score, 
-    precision_recall_fscore_support, 
+    accuracy_score,
+    precision_recall_fscore_support,
     confusion_matrix
 )
 
@@ -64,10 +64,10 @@ class MNISTEvaluator:
             cm = confusion_matrix(y_test, y_pred)
 
             sns.heatmap(
-                cm, 
-                annot=True, 
-                fmt="d", 
-                cmap="Blues", 
+                cm,
+                annot=True,
+                fmt="d",
+                cmap="Blues",
                 cbar=False,
                 xticklabels=self.class_names,
                 yticklabels=self.class_names,
