@@ -10,11 +10,11 @@ from sklearn.neural_network import MLPClassifier
 
 class MNISTModelBench:
     """
-    Classe responsável pela inicialização, treinamento idempotente, 
+    Classe responsável pela inicialização, treinamento idempotente,
     persistência e carregamento dos modelos de Machine Learning (KNN, Random Forest e MLP).
     """
     def __init__(
-        self, 
+        self,
         models_dir: Union[str, Path] = "/content/drive/MyDrive/mini_projeto_mnist/models",
         random_state: int = 42
     ):
@@ -36,7 +36,7 @@ class MNISTModelBench:
     ) -> KNeighborsClassifier:
         """
         Treina ou carrega o classificador K-Nearest Neighbors (KNN).
-        
+
         JUSTIFICATIVA TEÓRICA:
         - O KNN é um algoritmo não-paramétrico baseado em distância Euclidiana.
         - Definimos n_neighbors=3 para capturar fronteiras de decisão locais sem suavização excessiva.
@@ -63,7 +63,7 @@ class MNISTModelBench:
     ) -> RandomForestClassifier:
         """
         Treina ou carrega o classificador Random Forest.
-        
+
         JUSTIFICATIVA TEÓRICA:
         - Ensemble de Árvores de Decisão que reduz variância via Bagging e amostragem de atributos.
         - n_estimators=100 oferece um equilíbrio entre capacidade preditiva e tempo de processamento.
@@ -78,8 +78,8 @@ class MNISTModelBench:
         else:
             print("[CACHE MISS] Treinando modelo Random Forest...")
             model = RandomForestClassifier(
-                n_estimators=n_estimators, 
-                random_state=self.random_state, 
+                n_estimators=n_estimators,
+                random_state=self.random_state,
                 n_jobs=-1
             )
             model.fit(X_train, y_train)
@@ -94,7 +94,7 @@ class MNISTModelBench:
     ) -> MLPClassifier:
         """
         Treina ou carrega a Redes Neural Perceptron Multicamadas (MLP).
-        
+
         JUSTIFICATIVA TEÓRICA:
         - Arquitetura com duas camadas ocultas (128, 64 neurônios) e ativação ReLU.
         - Otimizador Adam com Early Stopping ativo para evitar overfitting e otimizar convergência.
