@@ -18,7 +18,7 @@ class MNISTOODBench:
     mascaramento de classes (Class Masking) e padronização dinâmica de fundo via OpenCV.
     """
     def __init__(
-        self, 
+        self,
         models_dir: Union[str, Path] = "/content/drive/MyDrive/mini_projeto_mnist/models",
         random_state: int = 42
     ):
@@ -27,9 +27,9 @@ class MNISTOODBench:
         self.random_state = random_state
 
     def train_or_load_masked_model(
-        self, 
-        X_train: np.ndarray, 
-        y_train: np.ndarray, 
+        self,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
         hidden_classes: List[int] = [4, 7]
     ) -> MLPClassifier:
         """
@@ -57,10 +57,10 @@ class MNISTOODBench:
         return model
 
     def evaluate_ood_generalization(
-        self, 
-        model: Any, 
-        X_test: np.ndarray, 
-        y_test: np.ndarray, 
+        self,
+        model: Any,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
         hidden_classes: List[int] = [4, 7]
     ) -> np.ndarray:
         """
@@ -139,8 +139,8 @@ class MNISTOODBench:
         return normalized_flat, img_28x28
 
     def plot_multiple_custom_inferences(
-        self, 
-        model: Any, 
+        self,
+        model: Any,
         images_dict: Dict[str, Tuple[np.ndarray, np.ndarray]]
     ) -> None:
         """
@@ -162,7 +162,7 @@ class MNISTOODBench:
 
             ax_img.imshow(img_28x28, cmap="gray")
             ax_img.set_title(
-                f"Fundo: {bg_label}\nPredição: Dígito {pred_digit} ({confidence:.1f}%)", 
+                f"Fundo: {bg_label}\nPredição: Dígito {pred_digit} ({confidence:.1f}%)",
                 fontweight="bold", fontsize=10
             )
             ax_img.axis("off")
@@ -178,9 +178,9 @@ class MNISTOODBench:
                 yval = bar.get_height()
                 if yval > 3.0:
                     ax_bar.text(
-                        bar.get_x() + bar.get_width()/2.0, 
-                        yval + 1.5, 
-                        f"{yval:.1f}%", 
+                        bar.get_x() + bar.get_width()/2.0,
+                        yval + 1.5,
+                        f"{yval:.1f}%",
                         ha="center", va="bottom", fontsize=8
                     )
 
