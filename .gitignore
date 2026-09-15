@@ -1,1 +1,5 @@
 models/*.joblib
+__pycache__/
+*.pyc
+models/*.joblib
+.gradio/
