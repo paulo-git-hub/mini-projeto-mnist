@@ -10,7 +10,7 @@ class MNISTPreprocessor:
     e normalização do dataset MNIST com suporte a persistência idempotente.
     """
     def __init__(
-        self, 
+        self,
         data_dir: Union[str, Path] = "/content/drive/MyDrive/mini_projeto_mnist/data",
         test_size: float = 0.15,
         val_size: float = 0.15,
@@ -18,20 +18,20 @@ class MNISTPreprocessor:
     ):
         """
         Inicializa o pré-processador configurando proporções e diretórios.
-        
+
         JUSTIFICATIVA TEÓRICA E ENGENHARIA:
         1. Divisão Estratificada (stratify=y):
-           Garante que a proporção exata de cada dígito (0 a 9) seja preservada 
-           identicamente nos conjuntos de Treino, Validação e Teste. Isso impede 
+           Garante que a proporção exata de cada dígito (0 a 9) seja preservada
+           identicamente nos conjuntos de Treino, Validação e Teste. Isso impede
            vieses de amostragem que comprometeriam a generalização do modelo.
-           
+
         2. Normalização Min-Max para [0.0, 1.0]:
-           Os pixels originais possuem escala de cinza inteira em [0, 255]. A conversão 
+           Os pixels originais possuem escala de cinza inteira em [0, 255]. A conversão
            para ponto flutuante dividindo por 255.0 é indispensável para:
-           - KNN: Evita que atributos com maiores magnitudes dominem o cálculo da 
+           - KNN: Evita que atributos com maiores magnitudes dominem o cálculo da
              distância Euclidiana.
-           - Redes Neurais (MLP): Garante a estabilidade numérica da retropropagação, 
-             otimizando a velocidade de convergência do Gradiente Descendente e 
+           - Redes Neurais (MLP): Garante a estabilidade numérica da retropropagação,
+             otimizando a velocidade de convergência do Gradiente Descendente e
              prevenindo explosão/desaparecimento de gradientes.
         """
         self.data_dir = Path(data_dir)
@@ -64,20 +64,20 @@ class MNISTPreprocessor:
 
         # 2. Primeira partição estratificada: Separação do Teste final (15%)
         X_train_val, X_test, y_train_val, y_test = train_test_split(
-            X_normalized, 
-            y, 
-            test_size=self.test_size, 
-            stratify=y, 
+            X_normalized,
+            y,
+            test_size=self.test_size,
+            stratify=y,
             random_state=self.random_state
         )
 
         # 3. Segunda partição estratificada: Separação de Treino e Validação (15% do total)
         relative_val_size = self.val_size / (1.0 - self.test_size)
         X_train, X_val, y_train, y_val = train_test_split(
-            X_train_val, 
-            y_train_val, 
-            test_size=relative_val_size, 
-            stratify=y_train_val, 
+            X_train_val,
+            y_train_val,
+            test_size=relative_val_size,
+            stratify=y_train_val,
             random_state=self.random_state
         )
 
